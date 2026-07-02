@@ -12,7 +12,6 @@ def main():
         print(f"Gagal mengambil halaman web. Status code: {response.status_code}")
         return
         
-    # Parsing HTML dengan BeautifulSoup
     soup = BeautifulSoup(response.content, "html.parser")
     
     # Mencari container postingan pekerjaan
@@ -24,11 +23,9 @@ def main():
     job_elements = results.find_all("div", class_="card-content")
     print(f"Ditemukan {len(job_elements)} lowongan pekerjaan.")
     
-    # Membuka file CSV untuk menyimpan data
     csv_file_path = "jobs.csv"
     with open(csv_file_path, mode="w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        # Menulis header kolom
         writer.writerow(["Title", "Company", "Location", "Detail URL"])
         
         # Loop untuk mengambil info detail setiap pekerjaan
@@ -37,13 +34,12 @@ def main():
             company_element = job_element.find("h3", class_="company")
             location_element = job_element.find("p", class_="location")
             
-            # Mencari link apply di card footer
             # card_content berada di dalam card. Link-link ada di card-footer
             card_element = job_element.find_parent("div", class_="card")
             apply_link = ""
             if card_element:
                 links = card_element.find_all("a", class_="card-footer-item")
-                # Mengambil link kedua (biasanya tombol "Apply")
+                # Mengambil link kedua 
                 if len(links) >= 2:
                     apply_link = links[1]["href"]
             
@@ -51,7 +47,6 @@ def main():
             company = company_element.text.strip() if company_element else ""
             location = location_element.text.strip() if location_element else ""
             
-            # Menulis baris data ke CSV
             writer.writerow([title, company, location, apply_link])
             
     print(f"Data pekerjaan berhasil disimpan ke file: {csv_file_path}")
