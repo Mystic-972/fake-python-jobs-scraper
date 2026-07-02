@@ -1,0 +1,18 @@
+# Python virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# User data output
+*.csv
+
+# IDE settings
+.vscode/
+.idea/
