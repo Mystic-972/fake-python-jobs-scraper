@@ -46,3 +46,6 @@ jobs.csv
 ## Source Website
 
 https://realpython.github.io/fake-jobs/
+
+## Project URL
+https://roadmap.sh/projects/job-listings-scraper
